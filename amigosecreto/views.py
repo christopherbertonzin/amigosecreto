@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, response
+from .models import Participante
+import random
 
 def home(request):
     return render(request, "index.html")
@@ -7,25 +9,20 @@ def home(request):
 
 def cadastro(request):
     if request.method == "POST":
-        redirect("add_participante")
+       return redirect("add_participante")
     return render(request, "organizador/cadastro.html")
 
 
 def add_participante(request):
-    return render(request, "cadastro.html")
+    if request.method == "POST":
+        nome = request.POST["nome"]
+        cod_participante = random.randint(1000, 9999)
+        participante = Participante(cod_participante, nome)
+        participante.save()
+        return redirect("add_participante")
 
-
-def del_participante(request):
-    pass
+    return render(request, "organizador/add_participante.html")
 
 
 def home_participante(request):
-    pass
-
-
-def add_presente(request):
-    pass
-
-
-def sortear(request):
     pass

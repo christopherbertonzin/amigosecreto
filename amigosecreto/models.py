@@ -6,6 +6,7 @@ class AmigoSecreto(models.Model):
 
 
 class Participante(models.Model):
+    cod_participante = models.IntegerField(primary_key=True)
     nome = models.CharField(max_length=50)
     id_amigo_sorteado = models.IntegerField()
 
